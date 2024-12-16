@@ -15,12 +15,12 @@ struct CatCell: View {
         VStack {
             HStack {
                 Spacer()
-                Image(systemName: "star")
+                Image(systemName: viewModel.favorite ? "star.fill" : "star")
             }
             Image(systemName: "face.dashed")
-            Text("Cat")
+            Text(viewModel.breed)
         }
         .background(.white)
-        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 8.0, height: 8.0)))
+        .clipShape(RoundedRectangle(cornerSize: roundCornersStandardSize))
     }
 }

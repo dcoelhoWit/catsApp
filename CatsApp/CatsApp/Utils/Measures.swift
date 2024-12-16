@@ -39,3 +39,5 @@ enum ImageMeasures: CGFloat {
     case roundedImageCornerSize = 8.0
     case carouselImageSize = 100.00
 }
+
+let roundCornersStandardSize = CGSize(width: 8.0, height: 8.0)

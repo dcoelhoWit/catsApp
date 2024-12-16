@@ -15,14 +15,26 @@ struct FavoriteCatsListView: View {
     
     var body: some View {
         VStack(spacing: CGFloat.zero) {
-            Text("Favorite Cats")
+            Text("title.favorite.cats".localized())
             
             Spacer()
                 .frame(height: SpacingMeasures.regularSpacer.rawValue)
             
-            LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer.rawValue) {
-                CatCell(viewModel: CatEntryViewModel())
-                CatCell(viewModel: CatEntryViewModel())
+            HStack(spacing: .zero) {
+                Spacer()
+                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
+                
+                ScrollView(.vertical) {
+                    LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer.rawValue) {
+                        ForEach(viewModel.favoriteCats, id: \.catId) { cat in
+                            CatCell(viewModel: cat)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                
+                Spacer()
+                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
             }
             
             Spacer()

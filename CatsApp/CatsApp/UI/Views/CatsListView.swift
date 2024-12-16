@@ -22,7 +22,7 @@ struct CatsListView: View {
             
             FavoriteCatsListView(viewModel: viewModel)
                 .tabItem {
-                    Label("Favorites", systemImage: "heart")
+                    Label("Favorites", systemImage: "star.fill")
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())

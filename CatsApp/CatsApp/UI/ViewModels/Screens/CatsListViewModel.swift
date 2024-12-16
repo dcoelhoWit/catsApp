@@ -14,4 +14,10 @@ class CatsListViewModel {
     init(cats: [CatEntryViewModel]) {
         self.cats = cats
     }
+    
+    var favoriteCats: [CatEntryViewModel] {
+        cats.filter {
+            $0.favorite == true
+        }
+    }
 }
