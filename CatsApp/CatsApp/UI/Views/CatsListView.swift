@@ -9,8 +9,6 @@ import SwiftUI
 
 struct CatsListView: View {
     
-    @Environment(Coordinator.self) private var coordinator
-    
     @State var viewModel: CatsListViewModel
     
     var body: some View {

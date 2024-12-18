@@ -6,18 +6,41 @@
 //
 
 import SwiftUI
+import UIKit
 
 @Observable
 class CatsListViewModel {
-    var cats: [CatEntryViewModel]
+    var service: CatsService
+    var cats: [CatViewModel] = []
     
-    init(cats: [CatEntryViewModel]) {
-        self.cats = cats
+    private let pageSize = 50
+    
+    init(service: CatsService) {
+        self.service = service
+        self.loadCats()
     }
     
-    var favoriteCats: [CatEntryViewModel] {
+    var favoriteCats: [CatViewModel] {
         cats.filter {
             $0.favorite == true
+        }
+    }
+    
+    private func loadCats() {
+        Task {
+            // List
+            var catsList: [CatEntryModel] = []
+            do {
+                catsList = try await service.loadCatsList(limit: pageSize, page: 0)
+            } catch let error as NetworkError {
+                print("ERROR LOADING CATS LIST: \(error.localizedDescription)")
+            }
+
+            let list = catsList
+            
+            await MainActor.run {
+                cats = ConversionUtils.catsListConversion(models: list)
+            }
         }
     }
 }

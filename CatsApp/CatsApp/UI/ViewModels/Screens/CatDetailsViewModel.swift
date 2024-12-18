@@ -2,16 +2,17 @@
 //  CatDetailsViewModel.swift
 //  CatsApp
 //
-//  Created by Diogo Coelho on 16/12/2024.
+//  Created by Diogo Coelho on 18/12/2024.
 //
 
 import SwiftUI
+import UIKit
 
 @Observable
 class CatDetailsViewModel {
-    var details: CatEntryDetailsModel
+    var cat: CatViewModel
     
-    init(details: CatEntryDetailsModel) {
-        self.details = details
+    init(cat: CatViewModel) {
+        self.cat = cat
     }
 }

@@ -1,17 +1,117 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@:" : {
+
+    },
+    "◀︎" : {
+
+    },
+    "★" : {
+
+    },
+    "☆" : {
+
+    },
+    "☘︎" : {
+
+    },
     "✘" : {
 
     },
     "All" : {
 
     },
-    "Cats Details View" : {
-
+    "cat.details.breed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breed"
+          }
+        }
+      }
+    },
+    "cat.details.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
+    },
+    "cat.details.origin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin"
+          }
+        }
+      }
+    },
+    "cat.details.temperament" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperament"
+          }
+        }
+      }
+    },
+    "description.readMe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Me"
+          }
+        }
+      }
     },
     "Favorites" : {
 
+    },
+    "title.all.cats" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Cats"
+          }
+        }
+      }
+    },
+    "title.favorite.cats" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        }
+      }
+    },
+    "title.readMe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Me"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

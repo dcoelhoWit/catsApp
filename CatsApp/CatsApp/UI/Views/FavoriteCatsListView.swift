@@ -18,14 +18,14 @@ struct FavoriteCatsListView: View {
             Text("title.favorite.cats".localized())
             
             Spacer()
-                .frame(height: SpacingMeasures.regularSpacer.rawValue)
+                .frame(height: SpacingMeasures.regularSpacer)
             
             HStack(spacing: .zero) {
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
+                    .frame(width: SpacingMeasures.smallSpacer)
                 
                 ScrollView(.vertical) {
-                    LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer.rawValue) {
+                    LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
                         ForEach(viewModel.favoriteCats, id: \.catId) { cat in
                             CatCell(viewModel: cat)
                         }
@@ -34,7 +34,7 @@ struct FavoriteCatsListView: View {
                 .frame(maxWidth: .infinity)
                 
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
+                    .frame(width: SpacingMeasures.smallSpacer)
             }
             
             Spacer()
@@ -44,6 +44,6 @@ struct FavoriteCatsListView: View {
     }
     
     var gridColumns: [GridItem] {
-        Array(repeating: GridItem(.flexible(), spacing: SpacingMeasures.smallSpacer.rawValue), count: 2)
+        Array(repeating: GridItem(.flexible(), spacing: SpacingMeasures.smallSpacer), count: 2)
     }
 }

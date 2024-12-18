@@ -18,11 +18,11 @@ struct ReadMeView: View {
             ZStack {
                 HStack(spacing: CGFloat.zero) {
                     Spacer()
-                        .frame(width: SpacingMeasures.regularSpacer.rawValue)
+                        .frame(width: SpacingMeasures.regularSpacer)
                     Button("✘") {
                         coordinator.dismissFullScreenCover()
                     }
-                    .font(.system(size: IconMeasures.dismissIconSize.rawValue))
+                    .font(.system(size: IconMeasures.dismissIconSize))
                     .foregroundStyle(.icon)
                     Spacer()
                 }
@@ -38,17 +38,17 @@ struct ReadMeView: View {
             Spacer()
             HStack(spacing: CGFloat.zero) {
                 Spacer()
-                    .frame(width: SpacingMeasures.regularSpacer.rawValue)
+                    .frame(width: SpacingMeasures.regularSpacer)
                 ScrollView {
                     VStack {
                         Spacer()
-                            .frame(height: SpacingMeasures.regularSpacer.rawValue)
+                            .frame(height: SpacingMeasures.regularSpacer)
                         Text(viewModel.description)
                             .foregroundStyle(.highlightedText)
                     }
                 }
                 Spacer()
-                    .frame(width: SpacingMeasures.regularSpacer.rawValue)
+                    .frame(width: SpacingMeasures.regularSpacer)
             }
             Spacer()
         }

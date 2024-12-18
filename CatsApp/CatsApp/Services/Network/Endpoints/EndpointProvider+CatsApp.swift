@@ -14,7 +14,7 @@ extension EndpointProvider {
     }
 
     var baseURL: String {
-        return "private-anon-921694c514-practical3.apiary-mock.com"
+        return "api.thecatapi.com"
     }
 
     func request() throws -> URLRequest {
@@ -35,6 +35,7 @@ extension EndpointProvider {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("true", forHTTPHeaderField: "X-Use-Cache")
+        urlRequest.addValue("x-api-key", forHTTPHeaderField: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")
 
         if let body = body {
             do {

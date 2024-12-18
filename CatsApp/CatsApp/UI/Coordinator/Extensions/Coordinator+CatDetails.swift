@@ -10,13 +10,13 @@ import SwiftUI
 extension Coordinator {
     
     @ViewBuilder
-    func buildCatDetailsView(catId: String) -> some View {
-        let viewModel = buildCatDetailsViewModel(catId: catId)
+    func buildCatDetailsView(cat: CatViewModel) -> some View {
+        let viewModel = buildCatDetailsViewModel(cat: cat)
         CatDetailsView(viewModel: viewModel)
     }
     
-    private func buildCatDetailsViewModel(catId: String) -> CatDetailsViewModel {
-        let viewModel = CatDetailsViewModel(details: CatEntryDetailsModel())
+    private func buildCatDetailsViewModel(cat: CatViewModel) -> CatDetailsViewModel {
+        let viewModel = CatDetailsViewModel(cat: cat)
         return viewModel
     }
 }

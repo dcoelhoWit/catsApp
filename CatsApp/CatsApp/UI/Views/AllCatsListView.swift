@@ -15,35 +15,62 @@ struct AllCatsListView: View {
     
     var body: some View {
         VStack(spacing: CGFloat.zero) {
-            Text("title.all.cats".localized())
-            
-            Spacer()
-                .frame(height: SpacingMeasures.regularSpacer.rawValue)
-            
-            HStack(spacing: .zero) {
+            // Header
+            HStack(spacing: CGFloat.zero) {
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
+                    .frame(width: SpacingMeasures.regularSpacer)
+                Button("☘︎") {
+                    coordinator.present(fullScreenCover: .readMe)
+                }
+                .font(.system(size: IconMeasures.readMeIconSize))
+                .foregroundStyle(Color.icon)
+                .accessibilityIdentifier("readMeButton")
+                .frame(width: IconMeasures.readMeIconSize, height: IconMeasures.readMeIconSize)
                 
-                ScrollView(.vertical) {
-                    LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer.rawValue) {
-                        ForEach(viewModel.cats, id: \.catId) { cat in
-                            CatCell(viewModel: cat)
+                Spacer()
+                Text("title.all.cats".localized())
+                    .foregroundStyle(Color.highlightedText)
+                    .font(.title2)
+                    .accessibilityIdentifier("allCatsTitle")
+                Spacer()
+                Spacer()
+                    .frame(width: IconMeasures.readMeIconSize, height: IconMeasures.readMeIconSize)
+            }
+            // Content
+            VStack(spacing: CGFloat.zero) {
+                Spacer()
+                    .frame(height: SpacingMeasures.regularSpacer)
+                
+                HStack(spacing: .zero) {
+                    Spacer()
+                        .frame(width: SpacingMeasures.smallSpacer)
+                    
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
+                            ForEach(Array(viewModel.cats.enumerated()), id: \.1.catId) { index, cat in
+                                if index == 0 {
+                                    CatCell(viewModel: cat)
+                                        .accessibilityIdentifier("firstCat")
+                                } else {
+                                    CatCell(viewModel: cat)
+                                }
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity)
+                    
+                    Spacer()
+                        .frame(width: SpacingMeasures.smallSpacer)
                 }
-                .frame(maxWidth: .infinity)
                 
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer.rawValue)
             }
-            
-            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
     }
     
     var gridColumns: [GridItem] {
-        Array(repeating: GridItem(.flexible(), spacing: SpacingMeasures.smallSpacer.rawValue), count: 2)
+        Array(repeating: GridItem(.flexible(), spacing: SpacingMeasures.smallSpacer), count: 2)
     }
 }

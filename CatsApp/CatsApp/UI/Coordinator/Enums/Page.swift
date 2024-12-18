@@ -8,7 +8,7 @@
 import Foundation
 
 enum Page: Identifiable, Hashable {
-    case catsList, catDetails(String)
+    case catsList, catDetails(CatViewModel)
     
     var id: String {
         switch self {

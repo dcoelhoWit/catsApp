@@ -12,4 +12,8 @@ struct ServiceFactory {
     func catsService() -> CatsService {
         return CatsNetworkService()
     }
+    
+    func catsMockService() -> CatsService {
+        return CatsMockService()
+    }
 }

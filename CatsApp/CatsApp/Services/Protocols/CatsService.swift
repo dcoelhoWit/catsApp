@@ -9,6 +9,5 @@ import Foundation
 import Combine
 
 protocol CatsService {
-    func loadCatsList() async -> [CatEntryModel]
-    func loadCatDetails(catId: String) async -> CatEntryDetailsModel
+    func loadCatsList(limit: Int, page: Int) async throws -> [CatEntryModel]
 }

@@ -18,57 +18,50 @@ class NetworkService {
         return URLSession(configuration: configuration)
     }
     
-    func request<T: Decodable>(endpoint: EndpointProvider, responseModel: T.Type) -> AnyPublisher<T, NetworkError> {
+    func request<T: Decodable>(endpoint: EndpointProvider, responseModel: T.Type) async throws -> T {
         do {
-            return session
-                .dataTaskPublisher(for: try endpoint.request())
-                .tryMap { output in
-                    return try self.manageResponse(data: output.data, response: output.response)
-                }
-                .mapError {
-                    $0 as? NetworkError ?? NetworkError(errorCode: "error.network".localized(), message: "Unknown API error \($0.localizedDescription)")
-                }
-                .eraseToAnyPublisher()
+            let (data, response) = try await session.data(for: endpoint.request())
+            return try self.manageResponse(data: data, response: response)
         } catch let error as NetworkError {
-            return AnyPublisher<T, NetworkError>(Fail(error: error))
+            throw error
         } catch {
-            return AnyPublisher<T, NetworkError>(Fail(error: NetworkError(
-                errorCode: "error.network".localized(),
-                message: "\(error.localizedDescription)"
-            )))
+            throw NetworkError(
+                errorCode: "Generic Error",
+                message: "Unknown API error \(error.localizedDescription)"
+            )
         }
     }
     
     func manageResponse<T: Decodable>(data: Data, response: URLResponse) throws -> T {
-            guard let response = response as? HTTPURLResponse else {
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError(
+                errorCode: "Network Error",
+                message: "error.network.invalid".localized()
+            )
+        }
+        switch response.statusCode {
+        case 200...299:
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
                 throw NetworkError(
-                    errorCode: "error.network".localized(),
-                    message: "error.network.invalid".localized()
+                    errorCode: "Decoding Error",
+                    message: "Error while decoding JSON"
                 )
             }
-            switch response.statusCode {
-            case 200...299:
-                do {
-                    return try JSONDecoder().decode(T.self, from: data)
-                } catch {
-                    throw NetworkError(
-                        errorCode: "decodingError",
-                        message: "error.network.decoding".localized()
-                    )
-                }
-            default:
-                guard let decodedError = try? JSONDecoder().decode(NetworkError.self, from: data) else {
-                    throw NetworkError(
-                        statusCode: response.statusCode,
-                        errorCode: "error.network".localized(),
-                        message: "error.network.backend".localized()
-                    )
-                }
+        default:
+            guard let decodedError = try? JSONDecoder().decode(NetworkError.self, from: data) else {
                 throw NetworkError(
                     statusCode: response.statusCode,
-                    errorCode: decodedError.errorCode,
-                    message: decodedError.message
+                    errorCode: "Decoding Error",
+                    message: "Error while decoding JSON"
                 )
             }
+            throw NetworkError(
+                statusCode: response.statusCode,
+                errorCode: decodedError.errorCode,
+                message: decodedError.message
+            )
         }
+    }
 }

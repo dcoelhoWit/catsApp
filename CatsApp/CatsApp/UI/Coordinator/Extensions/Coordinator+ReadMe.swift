@@ -17,8 +17,8 @@ extension Coordinator {
     
     private func buildReadMeViewModel() -> ReadMeViewModel {
         let viewModel = ReadMeViewModel(
-            title: "title.about".localized(),
-            description: "description.about".localized()
+            title: "title.readMe".localized(),
+            description: "description.readMe".localized()
         )
         return viewModel
     }

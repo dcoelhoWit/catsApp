@@ -41,9 +41,9 @@ class Coordinator {
         case .catsList:
             buildCatsListView()
         case .catDetails(
-            let catId
+            let cat
         ):
-            buildCatDetailsView(catId: catId)
+            buildCatDetailsView(cat: cat)
         }
     }
     

@@ -9,18 +9,48 @@ import SwiftUI
 
 struct CatCell: View {
     
-    @State var viewModel: CatEntryViewModel
+    @Environment(Coordinator.self) private var coordinator
+    
+    @State var viewModel: CatViewModel
+    @State(initialValue: ImageMeasures.thumbnailSize) var imageWidth
     
     var body: some View {
-        VStack {
-            HStack {
+        VStack(spacing: .zero) {
+            Spacer()
+            
+            HStack(spacing: .zero) {
                 Spacer()
-                Image(systemName: viewModel.favorite ? "star.fill" : "star")
+                
+                VStack() {
+                    LoadingImageView(
+                        imageWidth: $imageWidth,
+                        imageUrl: viewModel.imageUrl,
+                        clipShape: .rounded
+                    )
+                    Text(viewModel.breed)
+                }
+                
+                Spacer()
             }
-            Image(systemName: "face.dashed")
-            Text(viewModel.breed)
+            
+            Spacer()
         }
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerSize: roundCornersStandardSize))
+        .background(Color.entryBackground)
+        .clipShape(RoundedRectangle(cornerSize: CornerRadiusMeasures.standard))
+        .overlay {
+            VStack {
+                HStack {
+                    Spacer()
+                    Image(systemName: viewModel.favorite ? "star.fill" : "star")
+                }
+                Spacer()
+            }
+            .onTapGesture {
+                // TODO: add "mark as favorite" logic here
+            }
+        }
+        .onTapGesture {
+            coordinator.push(.catDetails(viewModel))
+        }
     }
 }
