@@ -25,7 +25,8 @@ class CatsMockService: NetworkService, CatsService {
         return []
     }
     
-    func addAsFavorite(imageId: String) async throws {
+    func addAsFavorite(imageId: String) async throws -> AddFavoriteResponseModel {
+        AddFavoriteResponseModel(id: 0, message: "")
     }
     
     func deleteFavorite(favId: String) async throws {

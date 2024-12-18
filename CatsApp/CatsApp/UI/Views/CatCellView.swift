@@ -11,9 +11,8 @@ struct CatCell: View {
     
     @Environment(Coordinator.self) private var coordinator
     
-    @State var viewModel: CatViewModel
+    @State var viewModel: CatCellViewModel
     @State(initialValue: ImageMeasures.thumbnailSize) var imageWidth
-    var service: CatsService
     
     var body: some View {
         VStack(spacing: .zero) {
@@ -25,10 +24,10 @@ struct CatCell: View {
                 VStack() {
                     LoadingImageView(
                         imageWidth: $imageWidth,
-                        imageUrl: viewModel.imageUrl,
+                        imageUrl: viewModel.cat.imageUrl,
                         clipShape: .rounded
                     )
-                    Text(viewModel.breed)
+                    Text(viewModel.cat.breed)
                 }
                 
                 Spacer()
@@ -42,16 +41,16 @@ struct CatCell: View {
             VStack {
                 HStack {
                     Spacer()
-                    Image(systemName: viewModel.favoriteId != nil ? "star.fill" : "star")
+                    Image(systemName: viewModel.cat.favoriteId != nil ? "star.fill" : "star")
                 }
                 Spacer()
             }
             .onTapGesture {
-                viewModel.setFavorite(service: service, imageId: viewModel.imageId, favId: viewModel.favoriteId)
+                viewModel.cat.setFavorite(service: viewModel.service, imageId: viewModel.cat.imageId, favId: viewModel.cat.favoriteId)
             }
         }
         .onTapGesture {
-            coordinator.push(.catDetails(viewModel))
+            coordinator.push(.catDetails(viewModel.cat))
         }
     }
 }

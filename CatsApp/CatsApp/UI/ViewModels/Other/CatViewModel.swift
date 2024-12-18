@@ -26,6 +26,7 @@ class CatViewModel: Hashable {
         self.temperament = temperament
         self.description = description
         self.imageId = imageId
+        self.favoriteId = favoriteId
     }
     
     static func == (lhs: CatViewModel, rhs: CatViewModel) -> Bool {
@@ -37,23 +38,36 @@ class CatViewModel: Hashable {
     }
     
     func setFavorite(service: CatsService, imageId: String?, favId: String?) {
-        if let imageId = imageId {
-            // Add as favorite
-            Task {
-                do {
-                    try await service.addAsFavorite(imageId: imageId)
-                } catch let error as NetworkError {
-                    print("ERROR SETTING FAVORITE: \(error.localizedDescription)")
-                }
-            }
-        } else if let favId = favId {
+        if let favId = favId {
             // Remove from favorites
             Task {
                 do {
                     try await service.deleteFavorite(favId: favId)
                 }
                 catch let error as NetworkError {
-                    print("ERROR SETTING FAVORITE: \(error.localizedDescription)")
+                    print("ERROR REMOVING FAVORITE: \(error.localizedDescription)")
+                }
+                
+                await MainActor.run {
+                    self.favoriteId = nil
+                }
+            }
+        } else if let imageId = imageId {
+            // Add as favorite
+            Task {
+                var favoriteIdString: String?
+                do {
+                    let response = try await service.addAsFavorite(imageId: imageId)
+                    favoriteIdString = "\(response.id)"
+                } catch let error as NetworkError {
+                    print("ERROR ADDING FAVORITE: \(error.localizedDescription)")
+                }
+                let favId = favoriteIdString
+                
+                await MainActor.run {
+                    if let favId = favId, !favId.isEmpty {
+                        favoriteId = favId
+                    }
                 }
             }
         }

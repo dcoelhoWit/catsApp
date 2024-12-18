@@ -135,6 +135,7 @@
       }
     },
     "Load More" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-PT" : {
           "stringUnit" : {

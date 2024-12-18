@@ -19,8 +19,11 @@ enum Endpoints: EndpointProvider {
             return "/v1/breeds"
         case .addFavorite:
             return "/v1/favourites"
-        case .deleteFavorite:
-            return "/v1/favourites"
+        case .deleteFavorite(let favId):
+            if favId.isEmpty {
+                return "/v1/favourites"
+            }
+            return "/v1/favorites/:\(favId)"
         case .getFavorites:
             return "/v1/favourites"
         }
@@ -46,7 +49,7 @@ enum Endpoints: EndpointProvider {
         case .addFavorite:
             return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
         case .deleteFavorite:
-            return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
+            return nil
         case .getFavorites:
             return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
         }

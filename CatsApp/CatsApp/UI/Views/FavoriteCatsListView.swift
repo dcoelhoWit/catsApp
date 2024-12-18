@@ -15,29 +15,51 @@ struct FavoriteCatsListView: View {
     
     var body: some View {
         VStack(spacing: CGFloat.zero) {
-            Text("title.favorite.cats".localized())
-            
-            Spacer()
-                .frame(height: SpacingMeasures.regularSpacer)
-            
-            HStack(spacing: .zero) {
+            // Header
+            HStack(spacing: CGFloat.zero) {
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer)
+                    .frame(width: SpacingMeasures.regularSpacer)
+                Button("☘︎") {
+                    coordinator.present(fullScreenCover: .readMe)
+                }
+                .font(.system(size: IconMeasures.readMeIconSize))
+                .foregroundStyle(Color.icon)
+                .accessibilityIdentifier("readMeButton")
+                .frame(width: IconMeasures.readMeIconSize, height: IconMeasures.readMeIconSize)
                 
-                ScrollView(.vertical) {
-                    LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
-                        ForEach(viewModel.favoriteCats, id: \.catId) { cat in
-                            CatCell(viewModel: cat, service: viewModel.service)
+                Spacer()
+                Text("title.favorite.cats".localized())
+                    .foregroundStyle(Color.highlightedText)
+                    .font(.title2)
+                    .accessibilityIdentifier("allCatsTitle")
+                Spacer()
+                Spacer()
+                    .frame(width: IconMeasures.readMeIconSize, height: IconMeasures.readMeIconSize)
+            }
+            // Content
+            VStack(spacing: CGFloat.zero) {
+                Spacer()
+                    .frame(height: SpacingMeasures.regularSpacer)
+                
+                HStack(spacing: .zero) {
+                    Spacer()
+                        .frame(width: SpacingMeasures.smallSpacer)
+                    
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
+                            ForEach(viewModel.favoriteCats, id: \.catId) { cat in
+                                CatCell(viewModel: viewModel.catCellViewModel(cat: cat))
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity)
+                    
+                    Spacer()
+                        .frame(width: SpacingMeasures.smallSpacer)
                 }
-                .frame(maxWidth: .infinity)
                 
                 Spacer()
-                    .frame(width: SpacingMeasures.smallSpacer)
             }
-            
-            Spacer()
         }
         .frame(maxHeight: .infinity)
         .background(Color.background)

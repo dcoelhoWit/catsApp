@@ -49,10 +49,10 @@ struct AllCatsListView: View {
                         LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
                             ForEach(Array(viewModel.cats.enumerated()), id: \.1.catId) { index, cat in
                                 if index == 0 {
-                                    CatCell(viewModel: cat, service: viewModel.service)
+                                    CatCell(viewModel: viewModel.catCellViewModel(cat: cat))
                                         .accessibilityIdentifier("firstCat")
                                 } else {
-                                    CatCell(viewModel: cat, service: viewModel.service)
+                                    CatCell(viewModel: viewModel.catCellViewModel(cat: cat))
                                 }
                             }
                         }

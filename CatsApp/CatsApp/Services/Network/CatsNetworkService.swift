@@ -33,13 +33,16 @@ class CatsNetworkService: NetworkService, CatsService {
         return response
     }
     
-    func addAsFavorite(imageId: String) async throws {
+    func addAsFavorite(imageId: String) async throws -> AddFavoriteResponseModel {
+        var response: AddFavoriteResponseModel
         let endpoint = Endpoints.addFavorite(imageId: imageId)
         do {
-            let _ = try await noReturnRequest(endpoint: endpoint)
+            response = try await request(endpoint: endpoint, responseModel: AddFavoriteResponseModel.self)
         } catch let error as NetworkError {
             throw error
         }
+        
+        return response
     }
     
     func deleteFavorite(favId: String) async throws {

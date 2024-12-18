@@ -33,6 +33,10 @@ class CatsListViewModel {
         return favs
     }
     
+    func catCellViewModel(cat: CatViewModel) -> CatCellViewModel {
+        CatCellViewModel(service: service, cat: cat)
+    }
+    
     func loadMoreCats() {
         loadCats()
     }
