@@ -20,14 +20,14 @@ final class CatsAppTests: XCTestCase {
     
     func testCatsListParseSuccess() async throws {
         let service = serviceFactory.catsMockService()
-        let cats: [CatEntryModel] = try await service.loadCatsList(limit: 100, page: 0)
+        let cats: [CatEntryModel] = try await service.loadCatsList(limit: 50, page: 0)
         
         XCTAssertNotNil(cats)
     }
     
     func testCatsListModelConversionSuccess() async throws {
         let service = serviceFactory.catsMockService()
-        let models: [CatEntryModel] = try await service.loadCatsList(limit: 100, page: 0)
+        let models: [CatEntryModel] = try await service.loadCatsList(limit: 50, page: 0)
         let viewModels: [CatViewModel] = ConversionUtils.catsListConversion(models: models)
         
         XCTAssertNotNil(viewModels)

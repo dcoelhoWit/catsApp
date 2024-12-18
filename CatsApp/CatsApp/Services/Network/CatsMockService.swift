@@ -21,6 +21,16 @@ class CatsMockService: NetworkService, CatsService {
         return []
     }
     
+    func loadFavoritesList() async throws -> [FavoriteEntryModel] {
+        return []
+    }
+    
+    func addAsFavorite(imageId: String) async throws {
+    }
+    
+    func deleteFavorite(favId: String) async throws {
+    }
+    
     private func loadJSON<T: Decodable>(filename: String, type: T.Type) -> T {
         guard let path = bundle.url(forResource: filename, withExtension: "json") else {
             fatalError("!!! JSON loading error !!!!")

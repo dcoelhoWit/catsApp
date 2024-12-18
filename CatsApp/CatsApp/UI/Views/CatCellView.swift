@@ -13,6 +13,7 @@ struct CatCell: View {
     
     @State var viewModel: CatViewModel
     @State(initialValue: ImageMeasures.thumbnailSize) var imageWidth
+    var service: CatsService
     
     var body: some View {
         VStack(spacing: .zero) {
@@ -41,12 +42,12 @@ struct CatCell: View {
             VStack {
                 HStack {
                     Spacer()
-                    Image(systemName: viewModel.favorite ? "star.fill" : "star")
+                    Image(systemName: viewModel.favoriteId != nil ? "star.fill" : "star")
                 }
                 Spacer()
             }
             .onTapGesture {
-                // TODO: add "mark as favorite" logic here
+                viewModel.setFavorite(service: service, imageId: viewModel.imageId, favId: viewModel.favoriteId)
             }
         }
         .onTapGesture {

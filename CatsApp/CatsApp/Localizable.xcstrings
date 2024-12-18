@@ -22,6 +22,23 @@
     "All" : {
 
     },
+    "button.load.more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load More"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregar Mais"
+          }
+        }
+      }
+    },
     "cat.details.breed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -29,6 +46,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breed"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raça"
           }
         }
       }
@@ -41,6 +64,12 @@
             "state" : "translated",
             "value" : "Description"
           }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição"
+          }
         }
       }
     },
@@ -51,6 +80,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origin"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origem"
           }
         }
       }
@@ -63,6 +98,12 @@
             "state" : "translated",
             "value" : "Temperament"
           }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperamento"
+          }
         }
       }
     },
@@ -72,13 +113,36 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Read Me"
+            "value" : "..."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "…"
           }
         }
       }
     },
     "Favorites" : {
-
+      "localizations" : {
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        }
+      }
+    },
+    "Load More" : {
+      "localizations" : {
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregar Mais"
+          }
+        }
+      }
     },
     "title.all.cats" : {
       "extractionState" : "manual",
@@ -87,6 +151,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "All Cats"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os Gatos"
           }
         }
       }
@@ -99,6 +169,12 @@
             "state" : "translated",
             "value" : "Favorites"
           }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
         }
       }
     },
@@ -109,6 +185,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Read Me"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leia-me"
           }
         }
       }

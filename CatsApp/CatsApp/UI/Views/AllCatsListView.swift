@@ -49,12 +49,31 @@ struct AllCatsListView: View {
                         LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
                             ForEach(Array(viewModel.cats.enumerated()), id: \.1.catId) { index, cat in
                                 if index == 0 {
-                                    CatCell(viewModel: cat)
+                                    CatCell(viewModel: cat, service: viewModel.service)
                                         .accessibilityIdentifier("firstCat")
                                 } else {
-                                    CatCell(viewModel: cat)
+                                    CatCell(viewModel: cat, service: viewModel.service)
                                 }
                             }
+                        }
+                        Button(action: {
+                            if !viewModel.isLoading {
+                                viewModel.loadMoreCats()
+                            }
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerSize: CornerRadiusMeasures.standard)
+                                    .foregroundStyle(Color.buttonBg)
+                                Text("button.load.more".localized())
+                                    .font(.title)
+                                    .foregroundStyle(Color.buttonTxt)
+                                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                            }
+                        }
+                        .overlay {
+                            ProgressView()
+                                .tint(.spinnerTint)
+                                .opacity(viewModel.isLoading ? 1.0 : 0.0)
                         }
                     }
                     .frame(maxWidth: .infinity)

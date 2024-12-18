@@ -9,14 +9,20 @@ import Foundation
 
 enum Endpoints: EndpointProvider {
     case catsList(limit: Int, page: Int)
-    case catImages(catsIds: [String])
-
+    case addFavorite(imageId: String)
+    case deleteFavorite(favId: String)
+    case getFavorites
+    
     var path: String {
         switch self {
         case .catsList:
             return "/v1/breeds"
-        case .catImages:
-            return "/v1/images/search"
+        case .addFavorite:
+            return "/v1/favourites"
+        case .deleteFavorite:
+            return "/v1/favourites"
+        case .getFavorites:
+            return "/v1/favourites"
         }
     }
 
@@ -24,7 +30,11 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList:
             return .get
-        case .catImages:
+        case .addFavorite:
+            return .post
+        case .deleteFavorite:
+            return .delete
+        case .getFavorites:
             return .get
         }
     }
@@ -33,26 +43,38 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList(let limit, let page):
             return [URLQueryItem(name: "limit", value: "\(limit)"), URLQueryItem(name: "page", value: "\(page)")]
-        case .catImages(let catsIds):
-            var catsIdsString = catsIds.joined(separator: ",")
-            if catsIdsString.isEmpty {
-                return [URLQueryItem(name: "limit", value: "100"), URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
-            }
-            catsIdsString.removeLast()
-            return [URLQueryItem(name: "limit", value: "100"), URLQueryItem(name: "breed_ids", value: catsIdsString), URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
+        case .addFavorite:
+            return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
+        case .deleteFavorite:
+            return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
+        case .getFavorites:
+            return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
         }
     }
 
     var body: [String: Any]? {
-        nil
+        switch self {
+        case .catsList:
+            return nil
+        case .addFavorite(let imageId):
+            return ["image_id": imageId]
+        case .deleteFavorite:
+            return nil
+        case .getFavorites:
+            return nil
+        }
     }
 
     var mock: String? {
         switch self {
         case .catsList:
             return "CatsListMock"
-        case .catImages:
-            return "CatImagesMock"
+        case .addFavorite:
+            return nil
+        case .deleteFavorite:
+            return nil
+        case .getFavorites:
+            return "FavoritesMock"
         }
     }
 }

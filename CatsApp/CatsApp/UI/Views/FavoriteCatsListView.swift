@@ -27,7 +27,7 @@ struct FavoriteCatsListView: View {
                 ScrollView(.vertical) {
                     LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
                         ForEach(viewModel.favoriteCats, id: \.catId) { cat in
-                            CatCell(viewModel: cat)
+                            CatCell(viewModel: cat, service: viewModel.service)
                         }
                     }
                 }

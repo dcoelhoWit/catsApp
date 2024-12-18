@@ -20,4 +20,34 @@ class CatsNetworkService: NetworkService, CatsService {
         
         return response
     }
+    
+    func loadFavoritesList() async throws -> [FavoriteEntryModel] {
+        var response: [FavoriteEntryModel]
+        let endpoint = Endpoints.getFavorites
+        do {
+            response = try await request(endpoint: endpoint, responseModel: [FavoriteEntryModel].self)
+        } catch let error as NetworkError {
+            throw error
+        }
+        
+        return response
+    }
+    
+    func addAsFavorite(imageId: String) async throws {
+        let endpoint = Endpoints.addFavorite(imageId: imageId)
+        do {
+            let _ = try await noReturnRequest(endpoint: endpoint)
+        } catch let error as NetworkError {
+            throw error
+        }
+    }
+    
+    func deleteFavorite(favId: String) async throws {
+        let endpoint = Endpoints.deleteFavorite(favId: favId)
+        do {
+            let _ = try await noReturnRequest(endpoint: endpoint)
+        } catch let error as NetworkError {
+            throw error
+        }
+    }
 }

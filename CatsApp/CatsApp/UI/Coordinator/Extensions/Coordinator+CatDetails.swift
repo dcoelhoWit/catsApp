@@ -16,7 +16,8 @@ extension Coordinator {
     }
     
     private func buildCatDetailsViewModel(cat: CatViewModel) -> CatDetailsViewModel {
-        let viewModel = CatDetailsViewModel(cat: cat)
+        let service = serviceFactory.catsService()
+        let viewModel = CatDetailsViewModel(service: service, cat: cat)
         return viewModel
     }
 }

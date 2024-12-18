@@ -32,6 +32,19 @@ class NetworkService {
         }
     }
     
+    func noReturnRequest(endpoint: EndpointProvider) async throws {
+        do {
+            let _ = try await session.data(for: endpoint.request())
+        } catch let error as NetworkError {
+            throw error
+        } catch {
+            throw NetworkError(
+                errorCode: "Generic Error",
+                message: "Unknown API error \(error.localizedDescription)"
+            )
+        }
+    }
+    
     func manageResponse<T: Decodable>(data: Data, response: URLResponse) throws -> T {
         guard let response = response as? HTTPURLResponse else {
             throw NetworkError(

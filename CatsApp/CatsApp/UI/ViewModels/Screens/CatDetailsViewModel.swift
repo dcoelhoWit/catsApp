@@ -10,9 +10,11 @@ import UIKit
 
 @Observable
 class CatDetailsViewModel {
+    var service: CatsService
     var cat: CatViewModel
     
-    init(cat: CatViewModel) {
+    init(service: CatsService, cat: CatViewModel) {
+        self.service = service
         self.cat = cat
     }
 }

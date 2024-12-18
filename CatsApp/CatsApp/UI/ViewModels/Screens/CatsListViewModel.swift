@@ -14,6 +14,12 @@ class CatsListViewModel {
     var cats: [CatViewModel] = []
     
     private let pageSize = 50
+    private var pageNumber: Int {
+        let floatResult = Float(cats.count) / Float(pageSize)
+        return Int(ceil(floatResult))
+    }
+    
+    var isLoading: Bool = false
     
     init(service: CatsService) {
         self.service = service
@@ -21,25 +27,47 @@ class CatsListViewModel {
     }
     
     var favoriteCats: [CatViewModel] {
-        cats.filter {
-            $0.favorite == true
+        let favs = cats.filter {
+            $0.favoriteId != nil
         }
+        return favs
+    }
+    
+    func loadMoreCats() {
+        loadCats()
     }
     
     private func loadCats() {
+        isLoading = true
+        
         Task {
             // List
             var catsList: [CatEntryModel] = []
             do {
-                catsList = try await service.loadCatsList(limit: pageSize, page: 0)
+                catsList = try await service.loadCatsList(limit: pageSize, page: pageNumber)
             } catch let error as NetworkError {
                 print("ERROR LOADING CATS LIST: \(error.localizedDescription)")
             }
-
-            let list = catsList
+            let staticCatsList = catsList
+            
+            // Favorites
+            var favoritesList: [FavoriteEntryModel] = []
+            do {
+                favoritesList = try await service.loadFavoritesList()
+            } catch let error as NetworkError {
+                print("ERROR LOADING FAVORITES LIST: \(error.localizedDescription)")
+            }
+            let staticFavoritesList = favoritesList
             
             await MainActor.run {
-                cats = ConversionUtils.catsListConversion(models: list)
+                let convertedCats = ConversionUtils.catsListConversion(models: staticCatsList, favoritesList: staticFavoritesList)
+                if !cats.isEmpty {
+                    cats.append(contentsOf: convertedCats)
+                } else {
+                    cats = convertedCats
+                }
+                
+                isLoading = false
             }
         }
     }

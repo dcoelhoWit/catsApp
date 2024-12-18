@@ -10,4 +10,7 @@ import Combine
 
 protocol CatsService {
     func loadCatsList(limit: Int, page: Int) async throws -> [CatEntryModel]
+    func loadFavoritesList() async throws -> [FavoriteEntryModel]
+    func addAsFavorite(imageId: String) async throws
+    func deleteFavorite(favId: String) async throws
 }
