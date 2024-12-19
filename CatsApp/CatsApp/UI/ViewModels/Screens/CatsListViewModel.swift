@@ -12,6 +12,7 @@ import UIKit
 class CatsListViewModel {
     var service: CatsService
     var cats: [CatViewModel] = []
+    var offlineMode: Bool = false
     
     private let pageSize = 50
     private var pageNumber: Int {
@@ -37,11 +38,7 @@ class CatsListViewModel {
         CatCellViewModel(service: service, cat: cat)
     }
     
-    func loadMoreCats() {
-        loadCats()
-    }
-    
-    private func loadCats() {
+    func loadCats() {
         isLoading = true
         
         Task {
@@ -65,7 +62,7 @@ class CatsListViewModel {
             
             await MainActor.run {
                 let convertedCats = ConversionUtils.catsListConversion(models: staticCatsList, favoritesList: staticFavoritesList)
-                if !cats.isEmpty {
+                if !cats.isEmpty && !offlineMode {
                     cats.append(contentsOf: convertedCats)
                 } else {
                     cats = convertedCats

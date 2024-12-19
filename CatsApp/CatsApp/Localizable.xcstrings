@@ -19,6 +19,9 @@
     "✘" : {
 
     },
+    "🐾" : {
+
+    },
     "All" : {
 
     },
@@ -113,13 +116,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "..."
+            "value" : "To be honest, I didn’t have too much time to dedicate to this challenge so I had to rush a few things. Still, I tried to cover as much as possible and try to demo a little bit of what I can do, even if it’s not perfect. Given the amount of time that I had, I had to drop a few things that wouldn’t be an issue otherwise, such as offline mode."
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "…"
+            "state" : "translated",
+            "value" : "Para ser sincero, não tive muito tempo para dedicar a este desafio por isso tive de apressar. Ainda assim tentei cobrir o máximo possível para tentar demonstrar um pouco daquilo que consigo fazer, ainda que não esteja perfeito. Dado o tempo disponível, tive de deixar cair algumas coisas que noutras condições não constituiriam um obstáculo, como é o caso do modo offline."
           }
         }
       }
@@ -141,6 +144,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Carregar Mais"
+          }
+        }
+      }
+    },
+    "offline.mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline Mode:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo Offline:"
+          }
+        }
+      }
+    },
+    "search.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisa"
           }
         }
       }

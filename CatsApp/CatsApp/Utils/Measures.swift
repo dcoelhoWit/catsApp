@@ -18,6 +18,7 @@ struct SizingMeasures {
     static let shadowHeight: CGFloat = 10.0
     static let tabSelectorHeight: CGFloat = 5.00
     static let sendButtonSize: CGFloat = 25.00
+    static let offlineModeButtonHeight: CGFloat = 50.00
 }
 
 struct FontSizes {
@@ -43,4 +44,5 @@ struct ImageMeasures {
 
 struct CornerRadiusMeasures {
     static let standard = CGSize(width: 8.0, height: 8.0)
+    static let search = CGSize(width: 20.0, height: 20.0)
 }
