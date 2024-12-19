@@ -21,16 +21,16 @@ class CatsMockService: NetworkService, CatsService {
         return []
     }
     
-    func loadFavoritesList() async throws -> [FavoriteEntryModel] {
+    func loadFavouritesList() async throws -> [FavouriteEntryModel] {
         return []
     }
     
-    func addAsFavorite(imageId: String) async throws -> AddFavoriteResponseModel {
-        AddFavoriteResponseModel(id: 0, message: "")
+    func addAsFavourite(imageId: String) async throws -> AddFavouriteResponseModel {
+        AddFavouriteResponseModel(id: 0, message: "")
     }
     
-    func deleteFavorite(favId: String) async throws -> RemoveFavoriteResponseModel {
-        RemoveFavoriteResponseModel(message: "")
+    func deleteFavourite(favId: String) async throws -> RemoveFavouriteResponseModel {
+        RemoveFavouriteResponseModel(message: "")
     }
     
     private func loadJSON<T: Decodable>(filename: String, type: T.Type) -> T {

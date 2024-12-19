@@ -32,8 +32,8 @@ struct CatDetailsView: View {
                     .font(.title2)
                     .accessibilityIdentifier("allCatsTitle")
                 Spacer()
-                Button(viewModel.cat.favoriteId != nil ? "★" : "☆") {
-                    viewModel.cat.setFavorite(service: viewModel.service, imageId: viewModel.cat.imageId, favId: viewModel.cat.favoriteId)
+                Button(viewModel.cat.favouriteId != nil ? "★" : "☆") {
+                    viewModel.cat.setFavourite(service: viewModel.service, imageId: viewModel.cat.imageId, favId: viewModel.cat.favouriteId)
                 }
                 .font(.system(size: IconMeasures.favIconSize))
                 .foregroundStyle(Color.icon)

@@ -1,5 +1,5 @@
 //
-//  FavoriteCatsListView.swift
+//  FavouriteCatsListView.swift
 //  CatsApp
 //
 //  Created by Diogo Coelho on 16/12/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoriteCatsListView: View {
+struct FavouriteCatsListView: View {
     
     @Environment(Coordinator.self) private var coordinator
     
@@ -28,7 +28,7 @@ struct FavoriteCatsListView: View {
                 .frame(width: IconMeasures.readMeIconSize, height: IconMeasures.readMeIconSize)
                 
                 Spacer()
-                Text("title.favorite.cats".localized())
+                Text("title.favourite.cats".localized())
                     .foregroundStyle(Color.highlightedText)
                     .font(.title2)
                     .accessibilityIdentifier("allCatsTitle")
@@ -47,7 +47,7 @@ struct FavoriteCatsListView: View {
                     
                     ScrollView(.vertical) {
                         LazyVGrid(columns: gridColumns, spacing: SpacingMeasures.smallSpacer) {
-                            ForEach(viewModel.favoriteCats, id: \.catId) { cat in
+                            ForEach(viewModel.favouriteCats, id: \.catId) { cat in
                                 CatCell(viewModel: viewModel.catCellViewModel(cat: cat))
                             }
                         }

@@ -41,12 +41,12 @@ struct CatCell: View {
             VStack {
                 HStack {
                     Spacer()
-                    Image(systemName: viewModel.cat.favoriteId != nil ? "star.fill" : "star")
+                    Image(systemName: viewModel.cat.favouriteId != nil ? "star.fill" : "star")
                 }
                 Spacer()
             }
             .onTapGesture {
-                viewModel.cat.setFavorite(service: viewModel.service, imageId: viewModel.cat.imageId, favId: viewModel.cat.favoriteId)
+                viewModel.cat.setFavourite(service: viewModel.service, imageId: viewModel.cat.imageId, favId: viewModel.cat.favouriteId)
             }
         }
         .onTapGesture {

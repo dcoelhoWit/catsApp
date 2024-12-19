@@ -1,5 +1,5 @@
 //
-//  FavoriteEntryModel.swift
+//  FavouriteEntryModel.swift
 //  CatsApp
 //
 //  Created by Diogo Coelho on 18/12/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoriteEntryModel: Decodable {
+struct FavouriteEntryModel: Decodable {
     var id: Int
     var imageId: String
     

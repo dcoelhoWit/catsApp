@@ -9,22 +9,22 @@ import Foundation
 
 enum Endpoints: EndpointProvider {
     case catsList(limit: Int, page: Int)
-    case addFavorite(imageId: String)
-    case deleteFavorite(favId: String)
-    case getFavorites
+    case addFavourite(imageId: String)
+    case deleteFavourite(favId: String)
+    case getFavourites
     
     var path: String {
         switch self {
         case .catsList:
             return "/v1/breeds"
-        case .addFavorite:
+        case .addFavourite:
             return "/v1/favourites"
-        case .deleteFavorite(let favId):
+        case .deleteFavourite(let favId):
             if favId.isEmpty {
                 return "/v1/favourites"
             }
             return "/v1/favourites/\(favId)"
-        case .getFavorites:
+        case .getFavourites:
             return "/v1/favourites"
         }
     }
@@ -33,11 +33,11 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList:
             return .get
-        case .addFavorite:
+        case .addFavourite:
             return .post
-        case .deleteFavorite:
+        case .deleteFavourite:
             return .delete
-        case .getFavorites:
+        case .getFavourites:
             return .get
         }
     }
@@ -46,11 +46,11 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList(let limit, let page):
             return [URLQueryItem(name: "limit", value: "\(limit)"), URLQueryItem(name: "page", value: "\(page)")]
-        case .addFavorite:
+        case .addFavourite:
             return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
-        case .deleteFavorite:
+        case .deleteFavourite:
             return nil
-        case .getFavorites:
+        case .getFavourites:
             return [URLQueryItem(name: "api_key", value: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")]
         }
     }
@@ -59,11 +59,11 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList:
             return nil
-        case .addFavorite(let imageId):
+        case .addFavourite(let imageId):
             return ["image_id": imageId]
-        case .deleteFavorite:
+        case .deleteFavourite:
             return nil
-        case .getFavorites:
+        case .getFavourites:
             return nil
         }
     }
@@ -72,12 +72,12 @@ enum Endpoints: EndpointProvider {
         switch self {
         case .catsList:
             return "CatsListMock"
-        case .addFavorite:
-            return nil
-        case .deleteFavorite:
-            return nil
-        case .getFavorites:
-            return "FavoritesMock"
+        case .addFavourite:
+            return "AddFavouriteMock"
+        case .deleteFavourite:
+            return "DeleteFavouriteMock"
+        case .getFavourites:
+            return "FavouritesMock"
         }
     }
 }

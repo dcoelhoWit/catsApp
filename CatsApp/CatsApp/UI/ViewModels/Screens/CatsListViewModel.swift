@@ -27,9 +27,9 @@ class CatsListViewModel {
         self.loadCats()
     }
     
-    var favoriteCats: [CatViewModel] {
+    var favouriteCats: [CatViewModel] {
         let favs = cats.filter {
-            $0.favoriteId != nil
+            $0.favouriteId != nil
         }
         return favs
     }
@@ -51,17 +51,17 @@ class CatsListViewModel {
             }
             let staticCatsList = catsList
             
-            // Favorites
-            var favoritesList: [FavoriteEntryModel] = []
+            // Favourites
+            var favouritesList: [FavouriteEntryModel] = []
             do {
-                favoritesList = try await service.loadFavoritesList()
+                favouritesList = try await service.loadFavouritesList()
             } catch let error as NetworkError {
-                print("ERROR LOADING FAVORITES LIST: \(error.localizedDescription)")
+                print("ERROR LOADING FavouriteS LIST: \(error.localizedDescription)")
             }
-            let staticFavoritesList = favoritesList
+            let staticFavouritesList = favouritesList
             
             await MainActor.run {
-                let convertedCats = ConversionUtils.catsListConversion(models: staticCatsList, favoritesList: staticFavoritesList)
+                let convertedCats = ConversionUtils.catsListConversion(models: staticCatsList, favouritesList: staticFavouritesList)
                 if !cats.isEmpty && !offlineMode {
                     cats.append(contentsOf: convertedCats)
                 } else {

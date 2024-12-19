@@ -15,12 +15,12 @@ struct CatsListView: View {
         TabView {
             AllCatsListView(viewModel: viewModel)
                 .tabItem {
-                    Label("All", systemImage: "pawprint.fill")
+                    Label("tab.all", systemImage: "pawprint.fill")
                 }
             
-            FavoriteCatsListView(viewModel: viewModel)
+            FavouriteCatsListView(viewModel: viewModel)
                 .tabItem {
-                    Label("Favorites", systemImage: "star.fill")
+                    Label("tab.favs", systemImage: "star.fill")
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())

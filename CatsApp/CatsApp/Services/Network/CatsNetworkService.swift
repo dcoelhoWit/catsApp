@@ -21,11 +21,11 @@ class CatsNetworkService: NetworkService, CatsService {
         return response
     }
     
-    func loadFavoritesList() async throws -> [FavoriteEntryModel] {
-        var response: [FavoriteEntryModel]
-        let endpoint = Endpoints.getFavorites
+    func loadFavouritesList() async throws -> [FavouriteEntryModel] {
+        var response: [FavouriteEntryModel]
+        let endpoint = Endpoints.getFavourites
         do {
-            response = try await request(endpoint: endpoint, responseModel: [FavoriteEntryModel].self)
+            response = try await request(endpoint: endpoint, responseModel: [FavouriteEntryModel].self)
         } catch let error as NetworkError {
             throw error
         }
@@ -33,11 +33,11 @@ class CatsNetworkService: NetworkService, CatsService {
         return response
     }
     
-    func addAsFavorite(imageId: String) async throws -> AddFavoriteResponseModel {
-        var response: AddFavoriteResponseModel
-        let endpoint = Endpoints.addFavorite(imageId: imageId)
+    func addAsFavourite(imageId: String) async throws -> AddFavouriteResponseModel {
+        var response: AddFavouriteResponseModel
+        let endpoint = Endpoints.addFavourite(imageId: imageId)
         do {
-            response = try await request(endpoint: endpoint, responseModel: AddFavoriteResponseModel.self)
+            response = try await request(endpoint: endpoint, responseModel: AddFavouriteResponseModel.self)
         } catch let error as NetworkError {
             throw error
         }
@@ -45,11 +45,11 @@ class CatsNetworkService: NetworkService, CatsService {
         return response
     }
     
-    func deleteFavorite(favId: String) async throws -> RemoveFavoriteResponseModel {
-        var response: RemoveFavoriteResponseModel
-        let endpoint = Endpoints.deleteFavorite(favId: favId)
+    func deleteFavourite(favId: String) async throws -> RemoveFavouriteResponseModel {
+        var response: RemoveFavouriteResponseModel
+        let endpoint = Endpoints.deleteFavourite(favId: favId)
         do {
-            response = try await request(endpoint: endpoint, responseModel: RemoveFavoriteResponseModel.self)
+            response = try await request(endpoint: endpoint, responseModel: RemoveFavouriteResponseModel.self)
         } catch let error as NetworkError {
             throw error
         }

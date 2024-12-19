@@ -16,9 +16,9 @@ class CatViewModel: Hashable {
     var temperament: String
     var description: String
     var imageId: String?
-    var favoriteId: String?
+    var favouriteId: String?
     
-    init(catId: String, breed: String, imageUrl: String, origin: String, temperament: String, description: String, imageId: String?, favoriteId: String?) {
+    init(catId: String, breed: String, imageUrl: String, origin: String, temperament: String, description: String, imageId: String?, favouriteId: String?) {
         self.catId = catId
         self.breed = breed
         self.imageUrl = imageUrl
@@ -26,7 +26,7 @@ class CatViewModel: Hashable {
         self.temperament = temperament
         self.description = description
         self.imageId = imageId
-        self.favoriteId = favoriteId
+        self.favouriteId = favouriteId
     }
     
     static func == (lhs: CatViewModel, rhs: CatViewModel) -> Bool {
@@ -37,36 +37,36 @@ class CatViewModel: Hashable {
         hasher.combine(catId)
     }
     
-    func setFavorite(service: CatsService, imageId: String?, favId: String?) {
+    func setFavourite(service: CatsService, imageId: String?, favId: String?) {
         if let favId = favId {
-            // Remove from favorites
+            // Remove from favourites
             Task {
                 do {
-                    let _ = try await service.deleteFavorite(favId: favId)
+                    let _ = try await service.deleteFavourite(favId: favId)
                 }
                 catch let error as NetworkError {
-                    print("ERROR REMOVING FAVORITE: \(error.localizedDescription)")
+                    print("ERROR REMOVING Favourite: \(error.localizedDescription)")
                 }
                 
                 await MainActor.run {
-                    self.favoriteId = nil
+                    self.favouriteId = nil
                 }
             }
         } else if let imageId = imageId {
-            // Add as favorite
+            // Add as favourite
             Task {
-                var favoriteIdString: String?
+                var favouriteIdString: String?
                 do {
-                    let response = try await service.addAsFavorite(imageId: imageId)
-                    favoriteIdString = "\(response.id)"
+                    let response = try await service.addAsFavourite(imageId: imageId)
+                    favouriteIdString = "\(response.id)"
                 } catch let error as NetworkError {
-                    print("ERROR ADDING FAVORITE: \(error.localizedDescription)")
+                    print("ERROR ADDING Favourite: \(error.localizedDescription)")
                 }
-                let favId = favoriteIdString
+                let favId = favouriteIdString
                 
                 await MainActor.run {
                     if let favId = favId, !favId.isEmpty {
-                        favoriteId = favId
+                        favouriteId = favId
                     }
                 }
             }

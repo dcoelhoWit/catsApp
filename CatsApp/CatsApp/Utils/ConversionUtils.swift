@@ -8,23 +8,23 @@
 import Foundation
 
 struct ConversionUtils {
-    static func catsListConversion(models: [CatEntryModel], favoritesList: [FavoriteEntryModel] = []) -> [CatViewModel] {
+    static func catsListConversion(models: [CatEntryModel], favouritesList: [FavouriteEntryModel] = []) -> [CatViewModel] {
         let catsViewModel = models.map {
             var imageUrl = ""
-            var favoriteId: String? = nil
+            var favouriteId: String? = nil
             if let refId = $0.referenceImageId, !refId.isEmpty {
                 imageUrl = "https://cdn2.thecatapi.com/images/\(refId).jpg"
                 
-                let favoriteIdNumber = favoritesList.first {
+                let favouriteIdNumber = favouritesList.first {
                     return $0.imageId == refId
                 }?.id
                 
-                if let favoriteIdNumber = favoriteIdNumber {
-                    favoriteId = "\(favoriteIdNumber)"
+                if let favouriteIdNumber = favouriteIdNumber {
+                    favouriteId = "\(favouriteIdNumber)"
                 }
             }
             
-            return CatViewModel(catId: $0.id, breed: $0.name, imageUrl: imageUrl, origin: $0.origin, temperament: $0.temperament, description: $0.description, imageId: $0.referenceImageId, favoriteId: favoriteId)
+            return CatViewModel(catId: $0.id, breed: $0.name, imageUrl: imageUrl, origin: $0.origin, temperament: $0.temperament, description: $0.description, imageId: $0.referenceImageId, favouriteId: favouriteId)
         }
         
         return catsViewModel
