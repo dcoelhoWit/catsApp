@@ -32,10 +32,8 @@ extension EndpointProvider {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.addValue("true", forHTTPHeaderField: "X-Use-Cache")
-        urlRequest.addValue("x-api-key", forHTTPHeaderField: "live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S")
+        urlRequest.addValue("live_xKuieF7JqeeFQO1VPN5zvYwx3STQJJ6lDfUF7B8yOM1FVs9dyV32ZYKoyqR2iF5S", forHTTPHeaderField: "x-api-key")
 
         if let body = body {
             do {

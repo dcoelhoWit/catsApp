@@ -42,7 +42,7 @@ class CatViewModel: Hashable {
             // Remove from favorites
             Task {
                 do {
-                    try await service.deleteFavorite(favId: favId)
+                    let _ = try await service.deleteFavorite(favId: favId)
                 }
                 catch let error as NetworkError {
                     print("ERROR REMOVING FAVORITE: \(error.localizedDescription)")

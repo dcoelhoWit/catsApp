@@ -29,7 +29,8 @@ class CatsMockService: NetworkService, CatsService {
         AddFavoriteResponseModel(id: 0, message: "")
     }
     
-    func deleteFavorite(favId: String) async throws {
+    func deleteFavorite(favId: String) async throws -> RemoveFavoriteResponseModel {
+        RemoveFavoriteResponseModel(message: "")
     }
     
     private func loadJSON<T: Decodable>(filename: String, type: T.Type) -> T {

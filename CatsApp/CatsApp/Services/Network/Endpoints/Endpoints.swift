@@ -23,7 +23,7 @@ enum Endpoints: EndpointProvider {
             if favId.isEmpty {
                 return "/v1/favourites"
             }
-            return "/v1/favorites/:\(favId)"
+            return "/v1/favourites/\(favId)"
         case .getFavorites:
             return "/v1/favourites"
         }

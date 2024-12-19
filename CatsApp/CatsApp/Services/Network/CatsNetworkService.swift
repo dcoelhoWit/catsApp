@@ -45,12 +45,15 @@ class CatsNetworkService: NetworkService, CatsService {
         return response
     }
     
-    func deleteFavorite(favId: String) async throws {
+    func deleteFavorite(favId: String) async throws -> RemoveFavoriteResponseModel {
+        var response: RemoveFavoriteResponseModel
         let endpoint = Endpoints.deleteFavorite(favId: favId)
         do {
-            let _ = try await noReturnRequest(endpoint: endpoint)
+            response = try await request(endpoint: endpoint, responseModel: RemoveFavoriteResponseModel.self)
         } catch let error as NetworkError {
             throw error
         }
+        
+        return response
     }
 }
